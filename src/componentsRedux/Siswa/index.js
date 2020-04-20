@@ -1,36 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import { DROPOUT, KURANGNILAI, TAMBAHNILAI, TAMBAHSISWA } from './../../reducer'
 
 const Index = (props) => {
-//export default (props) => {
-    const { jumlahSiswa } = props;
-    // const { dataJumlahMurid } = props;
-    // const [jumlahMurid, setJumlahMurid] = useState(props.jumlahMurid);
-    // const [nilaiSiswa, setNilaiSiswa] = useState(90);
+    const { jumlahSiswa, nilaiSiswa } = props;
 
     const tambahSiswa = () => {
-        props.dispatch({ type:'TAMBAHSISWA'})
+        props.dispatch({ type: TAMBAHSISWA })
     }
 
     const dropOut = () => {
-        props.dispatch({ type:'DROPOUT'})
+        props.dispatch({ type: DROPOUT })
     }
-    // const tambahNilai = () => {
-    //     setNilaiSiswa(nilaiSiswa + 1);
-    // }
-    // const kurangNilai = () => {
-    //     setNilaiSiswa(nilaiSiswa - 1);
-    // }
 
-    // useEffect(() => {
-    //     console.log('useEffect utk jumlah murid yang berubah', jumlahMurid);
-    //     dataJumlahMurid(jumlahMurid);
-    // }, [jumlahMurid, dataJumlahMurid]);
-
-    // useEffect(() => {
-    //     console.log('useEffect utk nilai siswa yang berubah', nilaiSiswa);
-    // }, [nilaiSiswa]);
-    
+    const tambahNilai = () => {
+        props.dispatch({ type: TAMBAHNILAI})
+    }
+    const kurangNilai = () => {
+        props.dispatch({type: KURANGNILAI});
+    }
 
     return (
         <div>
@@ -41,24 +29,23 @@ const Index = (props) => {
             <div>
                 jumlah murid : {jumlahSiswa}
             </div>
-            {/* <div>
+            <div>
                 Nilai : 
                 <button onClick={tambahNilai}>Tambah</button>
                 <button onClick={kurangNilai}>Kurang</button>
             </div>
             <div>
                 Nilai siswa adalah {nilaiSiswa}
-            </div> */}
-            
+            </div>
         </div>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        jumlahSiswa: state.jumlahSiswa
+        jumlahSiswa: state.jumlahSiswa,
+        nilaiSiswa: state.nilaiSiswa
     }
 }
-
 
 export default connect(mapStateToProps)(Index);
